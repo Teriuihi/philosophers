@@ -17,7 +17,7 @@
 
 typedef struct s_fork
 {
-	pthread_mutex_t	*mutex;
+	pthread_mutex_t	mutex;
 	t_bool			in_use;
 }	t_fork;
 #endif
