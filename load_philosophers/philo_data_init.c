@@ -35,6 +35,7 @@ static t_bool	init_data(t_philo *data, int len, char **args)
 		return (msg_bool(false, "Error amount to eat\n"));
 	data->left_fork = NULL;
 	data->last_meal = 0;
+	data->right_fork.in_use = false;
 	return (true);
 }
 
