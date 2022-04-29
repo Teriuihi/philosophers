@@ -13,7 +13,9 @@
 #ifndef UTIL_H
 # define UTIL_H
 # include "../headers/bool.h"
+# include "../philo_list/philo_list.h"
 
 t_bool	msg_bool(t_bool t_bool, char *str, ...);
 void	*msg_ptr(void *ptr, char *str, ...);
+void	free_philo_list(t_philo_list **top);
 #endif

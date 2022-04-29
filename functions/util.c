@@ -12,6 +12,7 @@
 
 #include "../not_libft/not_libft.h"
 #include "../headers/bool.h"
+#include "../philo_list/philo_list.h"
 
 t_bool	msg_bool(t_bool t_bool, char *str, ...)
 {
@@ -41,4 +42,20 @@ void	*msg_ptr(void *ptr, char *str, ...)
 			ft_printf_va(2, str, ap);
 	}
 	return (ptr);
+}
+
+void	free_philo_list(t_philo_list **top)
+{
+	t_philo_list	*entry;
+	t_philo_list	*tmp;
+
+	entry = *top;
+	while (entry)
+	{
+		free(entry->data);
+		tmp = entry;
+		entry = entry->next;
+		free(tmp);
+	}
+	free(top);
 }

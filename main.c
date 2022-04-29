@@ -45,6 +45,7 @@ int	main(int len, char **args)
 	philo_top = load_philos(load_philo_data(len, args), amount_philo);
 	if (init_mutex(*philo_top) == false)
 		return (1);
+	free_philo_list(philo_top);
 	return (0);
 }
 //
