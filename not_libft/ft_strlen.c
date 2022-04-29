@@ -1,17 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   util.h                                             :+:    :+:            */
+/*   ft_strlen.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/02/07 15:24:36 by sappunn       #+#    #+#                 */
-/*   Updated: 2022/02/07 15:24:36 by sappunn       ########   odam.nl         */
+/*   Created: 2021/12/10 21:30:55 by sappunn       #+#    #+#                 */
+/*   Updated: 2021/12/10 21:30:55 by sappunn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTIL_H
-# define UTIL_H
+#include "not_libft.h"
 
-void	err_quit(char *errmsg, int fd);
-#endif
+/**
+ * Calculates the length of a string
+ *
+ * @param	c	String to get the length of
+ *
+ * @return	The length of the string
+ */
+size_t	ft_strlen(const char *c)
+{
+	const char	*tmp;
+
+	tmp = c;
+	while (*tmp)
+		tmp++;
+	return (tmp - c);
+}

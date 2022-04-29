@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/libft.h"
+#include "not_libft.h"
 
 /**
  * Checks if a character is a whitespace

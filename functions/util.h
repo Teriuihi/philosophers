@@ -1,28 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   util.c                                             :+:    :+:            */
+/*   util.h                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/02/07 15:23:18 by sappunn       #+#    #+#                 */
-/*   Updated: 2022/02/07 15:23:18 by sappunn       ########   odam.nl         */
+/*   Created: 2022/02/07 15:24:36 by sappunn       #+#    #+#                 */
+/*   Updated: 2022/02/07 15:24:36 by sappunn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../not_libft/not_libft.h"
+#ifndef UTIL_H
+# define UTIL_H
 
-void	msg_quit(int exit_code, char *str, ...)
-{
-	va_list	ap;
-
-	if (str != NULL)
-	{
-		va_start(ap, str);
-		if (exit_code == 0)
-			ft_printf_va(1, str, ap);
-		else
-			ft_printf_va(2, str, ap);
-	}
-	exit(exit_code);
-}
+void	msg_quit(int exit_code, char *str, ...);
+#endif

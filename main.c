@@ -1,11 +1,11 @@
-#include "headers/philo_load.h"
-#include "headers/libft.h"
+#include "load_philosophers/philo_load.h"
+#include "not_libft/not_libft.h"
 
 int	main(int len, char **args)
 {
 	int				success;
 	int				amount_philo;
-	t_philo			**philo_top;
+	t_philo_list	**philo_top;
 
 	if (len != 5 && len != 6)
 		return (0);

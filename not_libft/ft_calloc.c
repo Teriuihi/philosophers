@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlen.c                                        :+:    :+:            */
+/*   ft_calloc.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/12/10 21:30:55 by sappunn       #+#    #+#                 */
-/*   Updated: 2021/12/10 21:30:55 by sappunn       ########   odam.nl         */
+/*   Created: 2021/12/10 21:30:49 by sappunn       #+#    #+#                 */
+/*   Updated: 2021/12/10 21:30:49 by sappunn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/libft.h"
+#include "not_libft.h"
 
 /**
- * Calculates the length of a string
+ * Allocates an array with a specified size and
+ * 	set's all bytes in that array to 0
  *
- * @param	c	String to get the length of
+ * @param	count	length of the array
+ * @param	size	size of the individual array sections
  *
- * @return	The length of the string
+ * @return	Array of specified length or NULL on failure
  */
-size_t	ft_strlen(const char *c)
+void	*ft_calloc(size_t count, size_t size)
 {
-	const char	*tmp;
+	void	*loc;
 
-	tmp = c;
-	while (*tmp)
-		tmp++;
-	return (tmp - c);
+	loc = malloc(size * count);
+	if (loc == 0)
+		return (NULL);
+	ft_memset(loc, 0, size * count);
+	return (loc);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/libft.h"
+#include "not_libft.h"
 
 /**
  * Free all array entries and itself

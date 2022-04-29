@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_memset.c                                        :+:    :+:            */
+/*   ft_memcpy.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
@@ -10,27 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/libft.h"
+#include "not_libft.h"
 
 /**
- * Sets an area of memory to the specified value
+ * Copies the area of memory from src into dst
  *
- * @param	b	Array of bytes to modify
- * @param	c	Value to set each byte to
- * @param	len	Amount of bytes to set to the specified value
+ * @param	dst	The area of memory to copy src into
+ * @param	src	The area of memory to copy into dst
+ * @param	n	The amount of bytes to copy
  *
- * @return	The initial value of the pointer to b
+ * @return	The initial value of the pointer to dst
  */
-char	*ft_memset(void *b, int c, size_t len)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned char	*tmp;
+	char		*tmp_dst;
+	const char	*tmp_src;
 
-	tmp = b;
-	while (len > 0)
+	if (dst == src)
+		return (dst);
+	tmp_dst = dst;
+	tmp_src = src;
+	while (n > 0)
 	{
-		len--;
-		*tmp = c;
-		tmp++;
+		n--;
+		*tmp_dst = *tmp_src;
+		tmp_dst++;
+		tmp_src++;
 	}
-	return (b);
+	return (dst);
 }

@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   util.c                                             :+:    :+:            */
+/*   ft_putstr_fd.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/02/07 15:23:18 by sappunn       #+#    #+#                 */
-/*   Updated: 2022/02/07 15:23:18 by sappunn       ########   odam.nl         */
+/*   Created: 2021/12/10 21:30:54 by sappunn       #+#    #+#                 */
+/*   Updated: 2021/12/10 21:30:54 by sappunn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../not_libft/not_libft.h"
+#include <unistd.h>
+#include "not_libft.h"
 
-void	msg_quit(int exit_code, char *str, ...)
+/**
+ * Writes a string to the specified file descriptor
+ *
+ * @param	s	String to write
+ * @param	fd	File descriptor to write to
+ */
+int	ft_putstr_fd(char *s, int fd)
 {
-	va_list	ap;
+	int	len;
 
-	if (str != NULL)
-	{
-		va_start(ap, str);
-		if (exit_code == 0)
-			ft_printf_va(1, str, ap);
-		else
-			ft_printf_va(2, str, ap);
-	}
-	exit(exit_code);
+	len = ft_strlen(s);
+	write(fd, s, len);
+	return (len);
 }

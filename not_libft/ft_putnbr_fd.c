@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_putstr_fd.c                                     :+:    :+:            */
+/*   ft_putnbr_fd.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/12/10 21:30:54 by sappunn       #+#    #+#                 */
-/*   Updated: 2021/12/10 21:30:54 by sappunn       ########   odam.nl         */
+/*   Created: 2021/12/10 17:58:40 by sappunn       #+#    #+#                 */
+/*   Updated: 2021/12/10 17:58:40 by sappunn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "../headers/libft.h"
+#include "not_libft.h"
 
 /**
- * Writes a string to the specified file descriptor
+ * Writes a number to the specified file descriptor
  *
- * @param	s	String to write
- * @param	fd	File descriptor to write to
+ * @param	n	The number to write
+ * @param	fd	The file descriptor to write to
+ *
+ * @return	amount of characters written
  */
-int	ft_putstr_fd(char *s, int fd)
+int	ft_putnbr_fd(long n, int fd)
 {
-	int	len;
+	char	*s;
+	int		len;
 
+	s = ft_itoa(n);
 	len = ft_strlen(s);
-	write(fd, s, len);
+	ft_putstr_fd(s, fd);
+	free(s);
 	return (len);
 }

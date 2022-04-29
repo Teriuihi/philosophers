@@ -4,10 +4,8 @@ CFLAGS=-Wall -Wextra -Werror
 RM=rm -f
 
 MAIN=push_swap.c
-FUNCTIONS=
+FUNCTIONS=functions/util.c load_philosophers/load_philos.c main.c
 LIBS=libft/libft.a
-LIB_FT=ft_calloc.c ft_atoi.c ft_isdigit.c ft_memset.c ft_memcpy.c \
-ft_putstr_fd.c ft_strlen.c
 
 FILES=$(addprefix functions/, $(FUNCTIONS)) $(MAIN)
 FILES_OBJ=$(FILES:%.c=%.o)
