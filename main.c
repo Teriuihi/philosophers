@@ -20,10 +20,14 @@ int	main(int len, char **args)
 	philo_top = load_philos(load_philo_data(len, args), amount_philo);
 	t_philo_list	*entry;
 	entry = *philo_top;
-	while (entry)
+	int id;
+
+	id = entry->id;
+	do
 	{
-		ft_printf(2, "philo %d", entry->id);
+		ft_printf(2, "philo %d\n", entry->id);
 		entry = entry->next;
 	}
+	while (id != entry->id);
 	return (0);
 }

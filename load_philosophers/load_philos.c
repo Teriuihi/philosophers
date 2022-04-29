@@ -67,7 +67,7 @@ t_philo	*load_philo_data(int len, char **args)
 	data->tts = ft_atoi(args[4], &success);
 	if (!success)
 		return (msg_ptr(NULL, "Error initializing time to sleep\n"));
-	if (len == 5)
+	if (len == 6)
 		data->amount_eat = ft_atoi(args[5], &success);
 	else
 		data->amount_eat = -1;
@@ -89,13 +89,13 @@ t_philo_list	**load_philos(t_philo	*data, int amount_philo)
 	if (!top)
 		msg_bool(1, "Error\n");
 	i = 1;
-	while (i < amount_philo)
+	while (i <= amount_philo)
 	{
 		new_data = ft_calloc(1, sizeof(t_philo));
 		if (!new_data)
 			msg_bool(1, "Error\n");
 		ft_memcpy(new_data, data, sizeof(t_philo));
-		if (top == NULL)
+		if (*top == NULL)
 			*top = ft_philo_new(i, new_data);
 		else
 			add_philo(top, ft_philo_new(i, new_data));
