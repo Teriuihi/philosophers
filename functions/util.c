@@ -11,18 +11,34 @@
 /* ************************************************************************** */
 
 #include "../not_libft/not_libft.h"
+#include "../headers/bool.h"
 
-void	msg_quit(int exit_code, char *str, ...)
+t_bool	msg_bool(t_bool t_bool, char *str, ...)
 {
 	va_list	ap;
 
 	if (str != NULL)
 	{
 		va_start(ap, str);
-		if (exit_code == 0)
+		if (t_bool == true)
 			ft_printf_va(1, str, ap);
 		else
 			ft_printf_va(2, str, ap);
 	}
-	exit(exit_code);
+	return (t_bool);
+}
+
+void	*msg_ptr(void *ptr, char *str, ...)
+{
+	va_list	ap;
+
+	if (str != NULL)
+	{
+		va_start(ap, str);
+		if (ptr != NULL)
+			ft_printf_va(1, str, ap);
+		else
+			ft_printf_va(2, str, ap);
+	}
+	return (ptr);
 }

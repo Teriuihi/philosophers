@@ -12,6 +12,8 @@
 
 #ifndef UTIL_H
 # define UTIL_H
+# include "../headers/bool.h"
 
-void	msg_quit(int exit_code, char *str, ...);
+t_bool	msg_bool(t_bool t_bool, char *str, ...);
+void	*msg_ptr(void *ptr, char *str, ...);
 #endif

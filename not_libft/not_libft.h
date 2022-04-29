@@ -27,4 +27,5 @@ int		ft_putnbr_fd(long n, int fd);
 int		ft_printf_va(int fd, const char *str, va_list ap);
 int		ft_printf(int fd, const char *str, ...);
 char	*ft_itoa(long n);
+int		ft_putchar_fd(char c, int fd);
 #endif

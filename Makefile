@@ -1,29 +1,27 @@
-NAME=push_swap
+NAME=philo
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror
 RM=rm -f
 
-MAIN=push_swap.c
-FUNCTIONS=functions/util.c load_philosophers/load_philos.c main.c
-LIBS=libft/libft.a
+LIBS=not_libft/not_libft.a
 
-FILES=$(addprefix functions/, $(FUNCTIONS)) $(MAIN)
+FILES=functions/util.c load_philosophers/load_philos.c main.c
 FILES_OBJ=$(FILES:%.c=%.o)
 FILES_LIBS=$(LIB_FT:%.c:%.o)
 
 all: $(NAME)
 
 $(NAME): $(FILES_OBJ)
-	$(MAKE) -C libft/
+	$(MAKE) -C not_libft/
 	$(CC) $(CFLAGS) -o $(NAME) $(FILES_OBJ) $(LIBS)
 
 clean:
 	$(RM) $(FILES_OBJ)
-	$(MAKE) -C libft/ clean
+	$(MAKE) -C not_libft/ clean
 
 fclean: clean
 	$(RM) $(NAME)
-	$(MAKE) -C libft/ fclean
+	$(MAKE) -C not_libft/ fclean
 
 re: fclean $(NAME)
 

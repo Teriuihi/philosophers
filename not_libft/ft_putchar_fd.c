@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   internal.h                                         :+:    :+:            */
+/*   ft_putchar_fd.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/28 19:19:13 by sappunn       #+#    #+#                 */
-/*   Updated: 2022/01/28 19:19:13 by sappunn       ########   odam.nl         */
+/*   Created: 2021/12/10 17:58:40 by sappunn       #+#    #+#                 */
+/*   Updated: 2021/12/10 17:58:40 by sappunn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_STRUCTS_H
-# define PHILO_STRUCTS_H
-# include <time.h>
+#include <unistd.h>
 
-typedef struct s_philo
+/**
+ * Writes a char to the specified file descriptor
+ *
+ * @param	c	Character to write
+ * @param	fd	File descriptor to write to
+ *
+ * @return	amount of characters written
+ */
+int	ft_putchar_fd(char c, int fd)
 {
-	time_t	ttd;
-	time_t	tte;
-	time_t	tts;
-	time_t	last_meal;
-	void	*right_fork;
-	void	*left_fork;
-	int		amount_eat;
-}	t_philo;
-
-typedef struct s_philo_list
-{
-	int					id;
-	t_philo				*data;
-	struct s_philo_list	*next;
-	struct s_philo_list	*prev;
-}	t_philo_list;
-
-#endif
+	write(fd, &c, 1);
+	return (1);
+}
