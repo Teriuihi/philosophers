@@ -47,6 +47,7 @@ t_philo_list	**load_philos(t_philo *data, int amount_philo)
 		add_new_philo_update_fork(top, ft_philo_new(i, new_data));
 		i++;
 	}
+	free(data);
 	last_philo(top)->data->left_fork = &(*top)->data->right_fork;
 	return (top);
 }
