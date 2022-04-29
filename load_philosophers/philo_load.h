@@ -12,8 +12,8 @@
 
 #ifndef PHILO_LOAD_H
 # define PHILO_LOAD_H
-# include "../headers/philo_structs.h"
+# include "../philo_list/philo_list.h"
 
-t_philo	*load_philo_data(int len, char **args);
-t_philo_list			**load_philos(t_philo *data, int amount_philo);
+t_philo			*load_philo_data(int len, char **args);
+t_philo_list	**load_philos(t_philo *data, int amount_philo);
 #endif

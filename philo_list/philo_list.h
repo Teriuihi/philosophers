@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   internal.h                                         :+:    :+:            */
+/*   philo_list.h                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/28 19:19:13 by sappunn       #+#    #+#                 */
-/*   Updated: 2022/01/28 19:19:13 by sappunn       ########   odam.nl         */
+/*   Created: 2022/04/29 21:32:16 by sappunn       #+#    #+#                 */
+/*   Updated: 2022/04/29 21:32:16 by sappunn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_STRUCTS_H
-# define PHILO_STRUCTS_H
-# include <time.h>
-# include "fork_struct.h"
+#ifndef PHILO_LIST_H
+# define PHILO_LIST_H
+# include "../headers/philo_structs.h"
 
-typedef struct s_philo
+typedef struct s_philo_list
 {
-	time_t	ttd;
-	time_t	tte;
-	time_t	tts;
-	time_t	last_meal;
-	t_fork	right_fork;
-	t_fork	*left_fork;
-	int		amount_eat;
-}	t_philo;
+	int					id;
+	t_philo				*data;
+	struct s_philo_list	*next;
+	struct s_philo_list	*prev;
+}	t_philo_list;
+
+t_philo_list	*last_philo(t_philo_list **top);
+void			add_philo(t_philo_list **top, t_philo_list *entry);
+t_philo_list	*ft_philo_new(int id, t_philo *data);
 
 #endif

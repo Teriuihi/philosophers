@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   internal.h                                         :+:    :+:            */
+/*   last_philo.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/28 19:19:13 by sappunn       #+#    #+#                 */
-/*   Updated: 2022/01/28 19:19:13 by sappunn       ########   odam.nl         */
+/*   Created: 2022/04/29 21:31:13 by sappunn       #+#    #+#                 */
+/*   Updated: 2022/04/29 21:31:13 by sappunn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_STRUCTS_H
-# define PHILO_STRUCTS_H
-# include <time.h>
-# include "fork_struct.h"
+#include "philo_list.h"
 
-typedef struct s_philo
+t_philo_list	*last_philo(t_philo_list **top)
 {
-	time_t	ttd;
-	time_t	tte;
-	time_t	tts;
-	time_t	last_meal;
-	t_fork	right_fork;
-	t_fork	*left_fork;
-	int		amount_eat;
-}	t_philo;
+	t_philo_list	*entry;
 
-#endif
+	if (top == NULL)
+		return (NULL);
+	entry = *top;
+	if (entry == NULL)
+		return (entry);
+	while (entry->next != NULL)
+		entry = entry->next;
+	return (entry);
+}

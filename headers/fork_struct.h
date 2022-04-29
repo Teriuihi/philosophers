@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   internal.h                                         :+:    :+:            */
+/*   fork_struct.h                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/28 19:19:13 by sappunn       #+#    #+#                 */
-/*   Updated: 2022/01/28 19:19:13 by sappunn       ########   odam.nl         */
+/*   Created: 2022/04/29 20:51:11 by sappunn       #+#    #+#                 */
+/*   Updated: 2022/04/29 20:51:11 by sappunn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_STRUCTS_H
-# define PHILO_STRUCTS_H
-# include <time.h>
-# include "fork_struct.h"
+#ifndef FORK_STRUCT_H
+# define FORK_STRUCT_H
+# include <pthread.h>
+# include "bool.h"
 
-typedef struct s_philo
+typedef struct s_fork
 {
-	time_t	ttd;
-	time_t	tte;
-	time_t	tts;
-	time_t	last_meal;
-	t_fork	right_fork;
-	t_fork	*left_fork;
-	int		amount_eat;
-}	t_philo;
-
+	pthread_mutex_t	*mutex;
+	t_bool			in_use;
+}	t_fork;
 #endif
