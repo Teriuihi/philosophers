@@ -12,6 +12,8 @@
 
 #include "../not_libft.h"
 #include "internal.h"
+#include "../../functions/util.h"
+#include <pthread.h>
 
 /**
  * Prints the argument as a string (part 2)
@@ -100,6 +102,8 @@ int	ft_printf_va(int fd, const char *str, va_list ap)
 	return (total_len);
 }
 
+#include <stdio.h>
+
 /**
  * Print a string to the standard output along with any specified arguments
  * 	at specified locations
@@ -109,10 +113,31 @@ int	ft_printf_va(int fd, const char *str, va_list ap)
  *
  * @return	amount of characters printed or negative numbers on failure
  */
-int	ft_printf(int fd, const char *str, ...)
+int	ft_printf(int fd, pthread_mutex_t *mutex, const char *str, ...)
 {
 	va_list	ap;
+	int		len;
 
+	printf("\n\nmutex: %p\n\n", mutex);
+	if ((len = pthread_mutex_lock(mutex)) != 0)
+	{
+		char	c = len + '0';
+		if (len == 22) //invalid value EINVAL
+		{
+			write(1, "HELP", 4);
+			return (0);
+		}
+		if (len == 35) //Avoided deadlock EDEADLK
+		{
+			write(1, "WTF\n", 4);
+			return (1);
+		}
+		write(1, "\nerr: ", 6);
+		write(1, &c, 1);
+		write(1, "\n", 1);
+	}
 	va_start(ap, str);
-	return (ft_printf_va(fd, str, ap));
+	len = ft_printf_va(fd, str, ap);
+	pthread_mutex_unlock(mutex);
+	return (len);
 }

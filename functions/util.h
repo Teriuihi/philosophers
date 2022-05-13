@@ -12,8 +12,15 @@
 
 #ifndef UTIL_H
 # define UTIL_H
+# include <pthread.h>
 # include "../headers/bool.h"
 # include "../philo_list/philo_list.h"
+
+typedef struct s_data
+{
+	pthread_mutex_t	*print;
+	t_philo_list	*entry;
+}	t_data;
 
 t_bool	msg_bool(t_bool t_bool, char *str, ...);
 void	*msg_ptr(void *ptr, char *str, ...);
