@@ -16,13 +16,12 @@
 # include "../headers/bool.h"
 # include "../philo_list/philo_list.h"
 
-typedef struct s_data
-{
-	pthread_mutex_t	*print;
-	t_philo_list	*entry;
-}	t_data;
-
+long	get_time(void);
 t_bool	msg_bool(t_bool t_bool, char *str, ...);
 void	*msg_ptr(void *ptr, char *str, ...);
 void	free_philo_list(t_philo_list **top);
+void	think(long time, t_philo_list *entry);
+void	eat(t_philo_list *entry);
+void	zzz(t_philo_list *entry);
+void	die(t_philo_list *entry);
 #endif

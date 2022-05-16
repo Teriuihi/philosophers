@@ -12,9 +12,8 @@
 
 #include "../functions/util.h"
 #include "../not_libft/not_libft.h"
-#include "../headers/philo_structs.h"
 
-static t_bool	init_data(t_philo *data, int len, char **args)
+static t_bool	init_data(t_philo *data, int len, char **args, t_bool *rip)
 {
 	int	success;
 
@@ -34,19 +33,21 @@ static t_bool	init_data(t_philo *data, int len, char **args)
 	if (!success)
 		return (msg_bool(false, "Error amount to eat\n"));
 	data->left_fork = NULL;
-	data->last_meal = 0;
+	data->last_meal = get_time();
 	data->right_fork.in_use = false;
+	*rip = false;
+	data->rip = rip;
 	return (true);
 }
 
-t_philo	*load_philo_data(int len, char **args)
+t_philo	*load_philo_data(int len, char **args, t_bool *rip)
 {
 	t_philo	*data;
 
 	data = ft_calloc(1, sizeof(t_philo));
 	if (!data)
 		return (msg_ptr(NULL, "Error initializing philosophers data struct\n"));
-	if (init_data(data, len, args) == false)
+	if (init_data(data, len, args, rip) == false)
 	{
 		free((data));
 		return (NULL);

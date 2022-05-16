@@ -7,7 +7,7 @@ LIBS=not_libft/not_libft.a
 
 FILES=main.c functions/util.c load_philosophers/load_philos.c \
 load_philosophers/philo_data_init.c philo_list/add_philo.c \
-philo_list/last_philo.c philo_list/new_philo.c
+philo_list/last_philo.c philo_list/new_philo.c functions/philo_actions.c
 FILES_OBJ=$(FILES:%.c=%.o)
 FILES_LIBS=$(LIB_FT:%.c:%.o)
 

@@ -18,14 +18,15 @@
 
 typedef struct s_philo
 {
-	time_t		ttd;
-	time_t		tte;
-	time_t		tts;
-	time_t		last_meal;
+	long		ttd;
+	long		tte;
+	long		tts;
+	long		last_meal;
 	t_fork		right_fork;
 	t_fork		*left_fork;
 	pthread_t	thread;
 	int			amount_eat;
+	t_bool		*rip;
 }	t_philo;
 
 #endif

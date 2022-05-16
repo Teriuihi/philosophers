@@ -35,14 +35,21 @@ t_philo_list	**load_philos(t_philo *data, int amount_philo)
 	if (data == NULL)
 		return (NULL);
 	top = ft_calloc(1, sizeof(t_philo_list));
-	if (!top)
+	if (top == NULL)
+	{
 		msg_bool(1, "Error\n");
+		return (NULL);
+	}
 	i = 1;
 	while (i <= amount_philo)
 	{
 		new_data = ft_calloc(1, sizeof(t_philo));
 		if (!new_data)
+		{
+			//TODO free the rest
 			msg_bool(1, "Error\n");
+			return (NULL);
+		}
 		ft_memcpy(new_data, data, sizeof(t_philo));
 		add_new_philo_update_fork(top, ft_philo_new(i, new_data));
 		i++;

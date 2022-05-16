@@ -13,6 +13,16 @@
 #include "../not_libft/not_libft.h"
 #include "../headers/bool.h"
 #include "../philo_list/philo_list.h"
+#include <sys/time.h>
+
+long	get_time(void)
+{
+	struct timeval	ct;
+
+	if (gettimeofday(&ct, NULL) != 0)
+		return (0);
+	return (ct.tv_sec * 1000 + ct.tv_usec);
+}
 
 t_bool	msg_bool(t_bool t_bool, char *str, ...)
 {
