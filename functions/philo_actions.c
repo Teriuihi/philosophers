@@ -12,95 +12,53 @@
 
 #include "../headers/philo_structs.h"
 #include "util.h"
-#include <pthread.h>
-#include <unistd.h>
-#include "stdio.h"
 
-static void	slep(long sleep)
+void	sleep_if_not_dead(long time, char *msg, t_philo_list *entry)
 {
-	long	time;
+	long	u_sec;
 
-	time = get_time() + sleep;
-	while (time <= get_time())
-		usleep(1);
-}
-
-void	think(long time, t_philo_list *entry)
-{
-	if (*entry->data->rip == true)
-		return ;
-	printf("%ld %d is thinking\n", get_time(), entry->id);
-	slep(time);
-}
-
-void	eat(t_philo_list *entry)
-{
-	long	usec;
-
-	if (*entry->data->rip == true)
-		return ;
-	if (get_time() - entry->data->last_meal > entry->data->ttd)
+	pthread_mutex_lock(entry->print);
+	if (*entry->rip == true)
 	{
-		die(entry);
+		pthread_mutex_unlock(entry->print);
 		return ;
 	}
-	pthread_mutex_lock(&entry->data->left_fork->mutex);
-	if (*entry->data->rip == true)
+	pthread_mutex_unlock(entry->print);
+	u_sec = get_time();
+	if (u_sec + time - entry->data->last_meal > entry->data->ttd)
 	{
-		pthread_mutex_unlock(&entry->data->left_fork->mutex);
-		return ;
-	}
-	printf("%ld %d has taken a fork\n", get_time(), entry->id);
-	pthread_mutex_lock(&entry->data->right_fork.mutex);
-	if (*entry->data->rip == true)
-	{
-		pthread_mutex_unlock(&entry->data->left_fork->mutex);
-		pthread_mutex_unlock(&entry->data->right_fork.mutex);
-		return ;
-	}
-	printf("%ld %d has taken a fork\n", get_time(), entry->id);
-	usec = get_time();
-	if (usec - entry->data->last_meal > entry->data->ttd)
-	{
-		die(entry);
-		pthread_mutex_unlock(&entry->data->left_fork->mutex);
-		pthread_mutex_unlock(&entry->data->right_fork.mutex);
-		return ;
-	}
-	entry->data->last_meal = usec;
-	printf("%ld %d is eating for %ld milliseconds\n", usec, entry->id, entry->data->tte);
-	slep(entry->data->tte);
-	long ex = get_time();
-	printf("%d released fork %d after %ld %ld\n", entry->id, pthread_mutex_unlock(&entry->data->left_fork->mutex), get_time() - usec, get_time() - ex);
-	printf("%d released fork %d after %ld %ld\n", entry->id, pthread_mutex_unlock(&entry->data->right_fork.mutex), get_time() - usec, get_time() - ex);
-}
-
-void	zzz(t_philo_list *entry)
-{
-	long	usec;
-	long	tmp;
-
-	if (*entry->data->rip == true)
-		return ;
-	usec = get_time();
-	if (usec + entry->data->tts - entry->data->last_meal > entry->data->ttd)
-	{
-		tmp = entry->data->last_meal + entry->data->ttd - usec;
-		if (tmp > 0)
+		u_sec = entry->data->last_meal + entry->data->ttd - u_sec;
+		if (u_sec > 0)
 		{
-			printf("%ld %d is sleeping\n", get_time(), entry->id);
-			slep(tmp);
+			my_print(msg, entry->id, entry, false);
+			mili_sleep(u_sec);
 		}
 		die(entry);
 		return ;
 	}
-	slep(entry->data->tts);
+	my_print(msg, entry->id, entry, false);
+	mili_sleep(time);
+}
+
+void	think(long time, t_philo_list *entry)
+{
+	sleep_if_not_dead(time, "%ld %d is thinking\n", entry);
+}
+
+void	zzz(t_philo_list *entry)
+{
+	sleep_if_not_dead(entry->data->tts, "%ld %d is sleeping\n", entry);
 }
 
 void	die(t_philo_list *entry)
 {
-	if (*entry->data->rip == true)
+	pthread_mutex_lock(entry->print);
+	if (*entry->rip == true)
+	{
+		pthread_mutex_unlock(entry->print);
 		return ;
-	*entry->data->rip = true;
-	printf("%ld %d died\n", get_time(), entry->id);
+	}
+	*entry->rip = true;
+	pthread_mutex_unlock(entry->print);
+	my_print("%ld %d died\n", entry->id, entry, true);
 }

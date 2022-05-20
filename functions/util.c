@@ -14,6 +14,7 @@
 #include "../headers/bool.h"
 #include "../philo_list/philo_list.h"
 #include <sys/time.h>
+#include <stdio.h>
 
 long	get_time(void)
 {
@@ -21,7 +22,7 @@ long	get_time(void)
 
 	if (gettimeofday(&ct, NULL) != 0)
 		return (0);
-	return (ct.tv_sec * 1000 + ct.tv_usec);
+	return (ct.tv_sec * 1000 + ct.tv_usec / 1000);
 }
 
 t_bool	msg_bool(t_bool t_bool, char *str, ...)
@@ -68,4 +69,39 @@ void	free_philo_list(t_philo_list **top)
 		free(tmp);
 	}
 	free(top);
+}
+
+long	my_print(char *str, int id, t_philo_list *entry, t_bool print)
+{
+	long	time;
+
+	if (pthread_mutex_lock(entry->print))
+	{
+		*entry->rip = true;
+		printf("Error, unable to lock print mutex\n");
+		return (-1);
+	}
+	if (*entry->rip == true && print == false)
+	{
+		pthread_mutex_unlock(entry->print);
+		return (-1);
+	}
+	time = get_time();
+	printf(str, time - *entry->start, id);
+	if (pthread_mutex_unlock(entry->print))
+	{
+		*entry->rip = true;
+		printf("Error, unable to unlock print mutex\n");
+		return (-1);
+	}
+	return (time);
+}
+
+void	mili_sleep(long sleep)
+{
+	long	time;
+
+	time = get_time() + sleep;
+	while (time >= get_time())
+		usleep(100);
 }

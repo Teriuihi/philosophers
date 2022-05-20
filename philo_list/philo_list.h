@@ -20,10 +20,14 @@ typedef struct s_philo_list
 	t_philo				*data;
 	struct s_philo_list	*next;
 	struct s_philo_list	*prev;
+	t_bool				*rip;
+	pthread_mutex_t		*print;
+	long				*start;
 }	t_philo_list;
 
 t_philo_list	*last_philo(t_philo_list **top);
 void			add_philo(t_philo_list **top, t_philo_list *entry);
-t_philo_list	*ft_philo_new(int id, t_philo *data);
+t_philo_list	*ft_philo_new(int id, t_philo *data, t_bool *rip,
+					pthread_mutex_t *print, long *pInt);
 
 #endif

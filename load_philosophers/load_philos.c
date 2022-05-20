@@ -26,12 +26,17 @@ static void	add_new_philo_update_fork(t_philo_list **top,
 	}
 }
 
-t_philo_list	**load_philos(t_philo *data, int amount_philo)
+t_philo_list	**load_philos(t_philo *data, int amount_philo, t_bool *rip,
+	pthread_mutex_t *print)
 {
 	int				i;
 	t_philo_list	**top;
 	t_philo			*new_data;
+	long			*time;
 
+	time = ft_calloc(1, sizeof(long));
+	if (time == NULL)
+		return (NULL);
 	if (data == NULL)
 		return (NULL);
 	top = ft_calloc(1, sizeof(t_philo_list));
@@ -51,7 +56,7 @@ t_philo_list	**load_philos(t_philo *data, int amount_philo)
 			return (NULL);
 		}
 		ft_memcpy(new_data, data, sizeof(t_philo));
-		add_new_philo_update_fork(top, ft_philo_new(i, new_data));
+		add_new_philo_update_fork(top, ft_philo_new(i, new_data, rip, print, time));
 		i++;
 	}
 	free(data);

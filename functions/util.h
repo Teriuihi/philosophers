@@ -24,4 +24,6 @@ void	think(long time, t_philo_list *entry);
 void	eat(t_philo_list *entry);
 void	zzz(t_philo_list *entry);
 void	die(t_philo_list *entry);
+long	my_print(char *str, int id, t_philo_list *entry, t_bool print);
+void	mili_sleep(long sleep);
 #endif

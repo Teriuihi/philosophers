@@ -26,7 +26,6 @@ typedef struct s_philo
 	t_fork		*left_fork;
 	pthread_t	thread;
 	int			amount_eat;
-	t_bool		*rip;
 }	t_philo;
 
 #endif
