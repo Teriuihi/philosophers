@@ -10,8 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <printf.h>
 #include "../functions/util.h"
-#include "../not_libft/not_libft.h"
+
+static t_bool	msg_bool(char *str)
+{
+	printf("%s", str);
+	return (FALSE);
+}
 
 static t_bool	init_data(t_philo *data, int len, char **args)
 {
@@ -19,23 +25,22 @@ static t_bool	init_data(t_philo *data, int len, char **args)
 
 	data->ttd = ft_atoi(args[2], &success);
 	if (!success)
-		return (msg_bool(false, "Error initializing time to die\n"));
+		return (msg_bool("Error initializing time to die\n"));
 	data->tte = ft_atoi(args[3], &success);
 	if (!success)
-		return (msg_bool(false, "Error initializing time to eat\n"));
+		return (msg_bool("Error initializing time to eat\n"));
 	data->tts = ft_atoi(args[4], &success);
 	if (!success)
-		return (msg_bool(false, "Error initializing time to sleep\n"));
+		return (msg_bool("Error initializing time to sleep\n"));
 	if (len == 6)
 		data->amount_eat = ft_atoi(args[5], &success);
 	else
 		data->amount_eat = -1;
 	if (!success)
-		return (msg_bool(false, "Error amount to eat\n"));
+		return (msg_bool("Error amount to eat\n"));
 	data->left_fork = NULL;
 	data->last_meal = get_time();
-	data->right_fork.in_use = false;
-	return (true);
+	return (TRUE);
 }
 
 t_philo	*load_philo_data(int len, char **args)
@@ -44,8 +49,11 @@ t_philo	*load_philo_data(int len, char **args)
 
 	data = ft_calloc(1, sizeof(t_philo));
 	if (!data)
-		return (msg_ptr(NULL, "Error initializing philosophers data struct\n"));
-	if (init_data(data, len, args) == false)
+	{
+		printf("Error initializing philosophers data struct\n");
+		return (NULL);
+	}
+	if (init_data(data, len, args) == FALSE)
 	{
 		free((data));
 		return (NULL);

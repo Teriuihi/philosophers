@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlen.c                                        :+:    :+:            */
+/*   ft_memset.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/12/10 21:30:55 by sappunn       #+#    #+#                 */
-/*   Updated: 2021/12/10 21:30:55 by sappunn       ########   odam.nl         */
+/*   Created: 2021/12/10 21:30:52 by sappunn       #+#    #+#                 */
+/*   Updated: 2021/12/10 21:30:52 by sappunn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "not_libft.h"
+#include <stdlib.h>
 
 /**
- * Calculates the length of a string
+ * Sets an area of memory to the specified value
  *
- * @param	c	String to get the length of
+ * @param	b	Array of bytes to modify
+ * @param	c	Value to set each byte to
+ * @param	len	Amount of bytes to set to the specified value
  *
- * @return	The length of the string
+ * @return	The initial value of the pointer to b
  */
-size_t	ft_strlen(const char *c)
+char	*ft_memset(void *b, int c, size_t len)
 {
-	const char	*tmp;
+	unsigned char	*tmp;
 
-	tmp = c;
-	while (*tmp)
+	tmp = b;
+	while (len > 0)
+	{
+		len--;
+		*tmp = c;
 		tmp++;
-	return (tmp - c);
+	}
+	return (b);
 }

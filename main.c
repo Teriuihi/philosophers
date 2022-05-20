@@ -10,30 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "load_philosophers/philo_load.h"
+#include "philo_load/philo_load.h"
 #include "philo_list/philo_list.h"
-#include "not_libft/not_libft.h"
 #include "functions/util.h"
 #include <pthread.h>
+#include <printf.h>
 
 void	*philo_thread(void *arg)
 {
 	t_philo_list	*entry;
 
 	entry = arg;
-	my_print("%ld started %d\n", entry->id, entry, false);
+	my_print("%ld started %d\n", entry->id, entry);
 	entry->data->last_meal = get_time();
 	if (entry->id % 2 == 0)
 		think(entry->data->ttd / 2, entry);
-	while (1)
+	while (check_death(entry) == FALSE)
 	{
-		pthread_mutex_lock(entry->print);
-		if (*entry->rip == true)
-		{
-			pthread_mutex_unlock(entry->print);
-			break ;
-		}
-		pthread_mutex_unlock(entry->print);
 		eat(entry);
 		if (entry->data->amount_eat > 0)
 			entry->data->amount_eat--;
@@ -52,13 +45,13 @@ t_bool	init_mutex(t_philo_list **top)
 	entry = *top;
 	while (entry)
 	{
-		if (pthread_mutex_init(&entry->data->right_fork.mutex, NULL) != 0)
-			return (false);
+		if (pthread_mutex_init(&entry->data->right_fork, NULL) != 0)
+			return (FALSE);
 		entry = entry->next;
 	}
 	entry = *top;
 	if (entry != NULL)
-		*entry->start = get_time();
+		entry->stuff->start = get_time();
 	while (entry)
 	{
 		pthread_create(&entry->data->thread, NULL, philo_thread, entry);
@@ -70,32 +63,48 @@ t_bool	init_mutex(t_philo_list **top)
 		pthread_join(entry->data->thread, NULL);
 		entry = entry->next;
 	}
-	return (true);
+	return (TRUE);
+}
+
+void	start_philo(int len, char **args, int amount_philo)
+{
+	t_philo_list	**philo_top;
+	t_stuff			stuff;
+
+	if (pthread_mutex_init(&stuff.print, NULL))
+	{
+		printf("Error, unable to initialize print mutex.\n");
+		return ;
+	}
+	stuff.rip = FALSE;
+	philo_top = load_philos(load_philo_data(len, args), amount_philo, &stuff);
+	if (philo_top == NULL)
+		return ;
+	if (init_mutex(philo_top) == FALSE)
+	{
+		free_philo_list(philo_top, FALSE);
+		printf("Error, starting threads\n");
+		return ;
+	}
+	free_philo_list(philo_top, TRUE);
 }
 
 int	main(int len, char **args)
 {
-	int				success;
-	int				amount_philo;
-	t_philo_list	**philo_top;
-	t_bool			rip;
-	pthread_mutex_t	print;
+	int			success;
+	int			amount_philo;
 
 	if (len != 5 && len != 6)
-		return (msg_bool(true,
-				"Invalid argument length, got %d expected 5 or 6\n", len));
+	{
+		printf("Invalid argument length, got %d expected 5 or 6\n", len);
+		return (0);
+	}
 	amount_philo = ft_atoi(args[1], &success);
 	if (!success)
-		return (msg_bool(true, "Error, out of mem\n"));
-	if (pthread_mutex_init(&print, NULL))
-		return (msg_bool(true, "Error, unable to initialize print mutex.\n"));
-	rip = false;
-	philo_top = load_philos(load_philo_data(len, args),
-			amount_philo, &rip, &print);
-	if (philo_top == NULL)
-		return (1);
-	if (init_mutex(philo_top) == false)
-		return (msg_bool(true, "Error, starting threads\n"));
-	free_philo_list(philo_top);
+	{
+		printf("Error, out of mem\n");
+		return (0);
+	}
+	start_philo(len, args, amount_philo);
 	return (0);
 }

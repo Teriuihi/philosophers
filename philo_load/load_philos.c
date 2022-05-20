@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <printf.h>
 #include "../philo_list/philo_list.h"
-#include "../not_libft/not_libft.h"
 #include "../functions/util.h"
 
 static void	add_new_philo_update_fork(t_philo_list **top,
@@ -26,37 +26,42 @@ static void	add_new_philo_update_fork(t_philo_list **top,
 	}
 }
 
-t_philo_list	**load_philos(t_philo *data, int amount_philo, t_bool *rip,
-	pthread_mutex_t *print)
+static t_bool	init(t_philo *data, t_philo_list ***top)
+{
+	if (data == NULL)
+	{
+		printf("Error\n");
+		return (FALSE);
+	}
+	*top = ft_calloc(1, sizeof(t_philo_list));
+	if (*top == NULL)
+	{
+		printf("Error\n");
+		return (FALSE);
+	}
+	return (TRUE);
+}
+
+t_philo_list	**load_philos(t_philo *data, int amount_philo, t_stuff *stuff)
 {
 	int				i;
 	t_philo_list	**top;
 	t_philo			*new_data;
-	long			*time;
 
-	time = ft_calloc(1, sizeof(long));
-	if (time == NULL)
+	if (init(data, &top) == FALSE)
 		return (NULL);
-	if (data == NULL)
-		return (NULL);
-	top = ft_calloc(1, sizeof(t_philo_list));
-	if (top == NULL)
-	{
-		msg_bool(1, "Error\n");
-		return (NULL);
-	}
 	i = 1;
 	while (i <= amount_philo)
 	{
 		new_data = ft_calloc(1, sizeof(t_philo));
 		if (!new_data)
 		{
-			//TODO free the rest
-			msg_bool(1, "Error\n");
+			free_philo_list(top, FALSE);
+			printf("Error\n");
 			return (NULL);
 		}
 		ft_memcpy(new_data, data, sizeof(t_philo));
-		add_new_philo_update_fork(top, ft_philo_new(i, new_data, rip, print, time));
+		add_new_philo_update_fork(top, ft_philo_new(i, new_data, stuff));
 		i++;
 	}
 	free(data);

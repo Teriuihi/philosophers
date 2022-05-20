@@ -1,30 +1,29 @@
 NAME=philo
 CC=gcc
-CFLAGS=-g -Wall -Wextra -Werror -fsanitize=thread
+CFLAGS=-Wall -Wextra -Werror
 RM=rm -f
 
-LIBS=not_libft/not_libft.a
-
-FILES=main.c functions/util.c load_philosophers/load_philos.c \
-load_philosophers/philo_data_init.c philo_list/add_philo.c \
-philo_list/last_philo.c philo_list/new_philo.c functions/philo_actions.c \
-functions/philo_eat.c
+FUNCTIONS=ft_atoi.c ft_calloc.c ft_isdigit.c ft_memcpy.c ft_memset.c \
+philo_actions.c philo_eat.c util.c free_util.c
+LOAD=load_philos.c philo_data_init.c
+LIST=add_philo.c last_philo.c new_philo.c
+FILES=main.c \
+$(addprefix functions/, ${FUNCTIONS}) \
+$(addprefix philo_load/, ${LOAD}) \
+$(addprefix philo_list/, ${LIST})
 FILES_OBJ=$(FILES:%.c=%.o)
 FILES_LIBS=$(LIB_FT:%.c:%.o)
 
 all: $(NAME)
 
 $(NAME): $(FILES_OBJ)
-	$(MAKE) -C not_libft/
 	$(CC) $(CFLAGS) -o $(NAME) $(FILES_OBJ) $(LIBS)
 
 clean:
 	$(RM) $(FILES_OBJ)
-	$(MAKE) -C not_libft/ clean
 
 fclean: clean
 	$(RM) $(NAME)
-	$(MAKE) -C not_libft/ fclean
 
 re: fclean $(NAME)
 

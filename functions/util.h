@@ -15,15 +15,20 @@
 # include <pthread.h>
 # include "../headers/bool.h"
 # include "../philo_list/philo_list.h"
+# include <stdlib.h>
 
 long	get_time(void);
-t_bool	msg_bool(t_bool t_bool, char *str, ...);
-void	*msg_ptr(void *ptr, char *str, ...);
-void	free_philo_list(t_philo_list **top);
+void	free_philo_list(t_philo_list **top, t_bool destroy_mutex);
 void	think(long time, t_philo_list *entry);
 void	eat(t_philo_list *entry);
 void	zzz(t_philo_list *entry);
 void	die(t_philo_list *entry);
-long	my_print(char *str, int id, t_philo_list *entry, t_bool print);
+long	my_print(char *str, int id, t_philo_list *entry);
 void	mili_sleep(long sleep);
+char	*ft_memset(void *b, int c, size_t len);
+void	*ft_calloc(size_t count, size_t size);
+int		ft_atoi(const char *str, int *success);
+int		ft_isdigit(int c);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+t_bool	check_death(t_philo_list *entry);
 #endif

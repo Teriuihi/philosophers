@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <printf.h>
 #include "../headers/philo_structs.h"
 #include "util.h"
 
@@ -17,26 +18,21 @@ void	sleep_if_not_dead(long time, char *msg, t_philo_list *entry)
 {
 	long	u_sec;
 
-	pthread_mutex_lock(entry->print);
-	if (*entry->rip == true)
-	{
-		pthread_mutex_unlock(entry->print);
+	if (check_death(entry) == TRUE)
 		return ;
-	}
-	pthread_mutex_unlock(entry->print);
 	u_sec = get_time();
 	if (u_sec + time - entry->data->last_meal > entry->data->ttd)
 	{
 		u_sec = entry->data->last_meal + entry->data->ttd - u_sec;
 		if (u_sec > 0)
 		{
-			my_print(msg, entry->id, entry, false);
+			my_print(msg, entry->id, entry);
 			mili_sleep(u_sec);
 		}
 		die(entry);
 		return ;
 	}
-	my_print(msg, entry->id, entry, false);
+	my_print(msg, entry->id, entry);
 	mili_sleep(time);
 }
 
@@ -52,13 +48,13 @@ void	zzz(t_philo_list *entry)
 
 void	die(t_philo_list *entry)
 {
-	pthread_mutex_lock(entry->print);
-	if (*entry->rip == true)
+	pthread_mutex_lock(&entry->stuff->print);
+	if (entry->stuff->rip == TRUE)
 	{
-		pthread_mutex_unlock(entry->print);
+		pthread_mutex_unlock(&entry->stuff->print);
 		return ;
 	}
-	*entry->rip = true;
-	pthread_mutex_unlock(entry->print);
-	my_print("%ld %d died\n", entry->id, entry, true);
+	entry->stuff->rip = TRUE;
+	printf("%ld %d died\n", get_time() - entry->stuff->start, entry->id);
+	pthread_mutex_unlock(&entry->stuff->print);
 }

@@ -14,18 +14,17 @@
 # define PHILO_STRUCTS_H
 # include <time.h>
 # include <pthread.h>
-# include "fork_struct.h"
 
 typedef struct s_philo
 {
-	long		ttd;
-	long		tte;
-	long		tts;
-	long		last_meal;
-	t_fork		right_fork;
-	t_fork		*left_fork;
-	pthread_t	thread;
-	int			amount_eat;
+	long			ttd;
+	long			tte;
+	long			tts;
+	long			last_meal;
+	pthread_mutex_t	right_fork;
+	pthread_mutex_t	*left_fork;
+	pthread_t		thread;
+	int				amount_eat;
 }	t_philo;
 
 #endif

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "not_libft.h"
+#include "util.h"
 
 /**
  * Allocates an array with a specified size and

@@ -11,10 +11,9 @@
 /* ************************************************************************** */
 
 #include "philo_list.h"
-#include "../not_libft/not_libft.h"
+#include "../functions/util.h"
 
-t_philo_list	*ft_philo_new(int id, t_philo *data, t_bool *rip,
-								pthread_mutex_t *print, long *time)
+t_philo_list	*ft_philo_new(int id, t_philo *data, t_stuff *stuff)
 {
 	t_philo_list	*start;
 
@@ -23,10 +22,8 @@ t_philo_list	*ft_philo_new(int id, t_philo *data, t_bool *rip,
 		return (NULL);
 	start->id = id;
 	start->data = data;
-	start->rip = rip;
-	start->print = print;
+	start->stuff = stuff;
 	start->next = NULL;
 	start->prev = NULL;
-	start->start = time;
 	return (start);
 }

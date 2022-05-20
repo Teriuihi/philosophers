@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fork_struct.h                                      :+:    :+:            */
+/*   philo_load.h                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: sappunn <sappunn@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/04/29 20:51:11 by sappunn       #+#    #+#                 */
-/*   Updated: 2022/04/29 20:51:11 by sappunn       ########   odam.nl         */
+/*   Created: 2022/02/07 15:25:15 by sappunn       #+#    #+#                 */
+/*   Updated: 2022/02/07 15:25:15 by sappunn       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORK_STRUCT_H
-# define FORK_STRUCT_H
-# include <pthread.h>
-# include "bool.h"
+#ifndef PHILO_LOAD_H
+# define PHILO_LOAD_H
+# include "../philo_list/philo_list.h"
 
-typedef struct s_fork
-{
-	pthread_mutex_t	mutex;
-	t_bool			in_use;
-}	t_fork;
+t_philo			*load_philo_data(int len, char **args);
+t_philo_list	**load_philos(t_philo *data, int amount_philo, t_stuff *stuff);
 #endif
