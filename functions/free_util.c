@@ -20,7 +20,7 @@ void	free_philo_list(t_philo_list **top, t_bool destroy_mutex)
 	t_philo_list	*tmp;
 
 	entry = *top;
-	pthread_mutex_destroy(&entry->stuff->print);
+	pthread_mutex_destroy(&(entry->stuff->print));
 	while (entry)
 	{
 		if (destroy_mutex == TRUE)

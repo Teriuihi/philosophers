@@ -34,7 +34,7 @@ int	take_fork(pthread_mutex_t *fork, t_philo_list *entry)
 		pthread_mutex_unlock(fork);
 		return (1);
 	}
-	pthread_mutex_unlock(&entry->stuff->print);
+	pthread_mutex_unlock(&(entry->stuff->print));
 	if (get_time() - entry->data->last_meal > entry->data->ttd)
 	{
 		die(entry);

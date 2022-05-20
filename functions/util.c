@@ -29,15 +29,16 @@ long	my_print(char *str, int id, t_philo_list *entry)
 {
 	long	time;
 
-	pthread_mutex_lock(&entry->stuff->print);
+	pthread_mutex_lock(&(entry->stuff->print));
 	if (entry->stuff->rip == TRUE)
 	{
-		pthread_mutex_unlock(&entry->stuff->print);
+		pthread_mutex_unlock(&(entry->stuff->print));
 		return (-1);
 	}
 	time = get_time();
+	printf("%p ", &(entry->stuff->print));
 	printf(str, time - entry->stuff->start, id);
-	pthread_mutex_unlock(&entry->stuff->print);
+	pthread_mutex_unlock(&(entry->stuff->print));
 	return (time);
 }
 
@@ -54,8 +55,8 @@ t_bool	check_death(t_philo_list *entry)
 {
 	t_bool	result;
 
-	pthread_mutex_lock(&entry->stuff->print);
+	pthread_mutex_lock(&(entry->stuff->print));
 	result = entry->stuff->rip;
-	pthread_mutex_unlock(&entry->stuff->print);
+	pthread_mutex_unlock(&(entry->stuff->print));
 	return (result);
 }

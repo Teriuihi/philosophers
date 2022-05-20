@@ -48,13 +48,14 @@ void	zzz(t_philo_list *entry)
 
 void	die(t_philo_list *entry)
 {
-	pthread_mutex_lock(&entry->stuff->print);
+	pthread_mutex_lock(&(entry->stuff->print));
 	if (entry->stuff->rip == TRUE)
 	{
-		pthread_mutex_unlock(&entry->stuff->print);
+		pthread_mutex_unlock(&(entry->stuff->print));
 		return ;
 	}
 	entry->stuff->rip = TRUE;
+	printf("%p ", &(entry->stuff->print));
 	printf("%ld %d died\n", get_time() - entry->stuff->start, entry->id);
-	pthread_mutex_unlock(&entry->stuff->print);
+	pthread_mutex_unlock(&(entry->stuff->print));
 }
