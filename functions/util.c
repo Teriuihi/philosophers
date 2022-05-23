@@ -36,7 +36,6 @@ long	my_print(char *str, int id, t_philo_list *entry)
 		return (-1);
 	}
 	time = get_time();
-	printf("%p ", &(entry->stuff->print));
 	printf(str, time - entry->stuff->start, id);
 	pthread_mutex_unlock(&(entry->stuff->print));
 	return (time);
@@ -47,8 +46,8 @@ void	mili_sleep(long sleep)
 	long	time;
 
 	time = get_time() + sleep;
-	while (time >= get_time())
-		usleep(100);
+	while (time > get_time())
+		usleep(50);
 }
 
 t_bool	check_death(t_philo_list *entry)

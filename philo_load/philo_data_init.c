@@ -24,16 +24,20 @@ static t_bool	init_data(t_philo *data, int len, char **args)
 	int	success;
 
 	data->ttd = ft_atoi(args[2], &success);
-	if (!success)
+	if (!success || data->ttd < 1)
 		return (msg_bool("Error initializing time to die\n"));
 	data->tte = ft_atoi(args[3], &success);
-	if (!success)
+	if (!success || data->tte < 1)
 		return (msg_bool("Error initializing time to eat\n"));
 	data->tts = ft_atoi(args[4], &success);
-	if (!success)
+	if (!success || data->tts < 1)
 		return (msg_bool("Error initializing time to sleep\n"));
 	if (len == 6)
+	{
 		data->amount_eat = ft_atoi(args[5], &success);
+		if (!success || data->amount_eat < 1)
+			return (msg_bool("Error initializing amount to eat\n"));
+	}
 	else
 		data->amount_eat = -1;
 	if (!success)

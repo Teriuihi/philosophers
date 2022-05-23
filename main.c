@@ -21,10 +21,9 @@ void	*philo_thread(void *arg)
 	t_philo_list	*entry;
 
 	entry = arg;
-	my_print("%ld started %d\n", entry->id, entry);
 	entry->data->last_meal = get_time();
-	if (entry->id % 2 == 0)
-		think(entry->data->ttd / 2, entry);
+	if (entry->id % 2 == 1)
+		think(entry->data->tte / 2, entry);
 	while (check_death(entry) == FALSE)
 	{
 		eat(entry);
@@ -33,7 +32,7 @@ void	*philo_thread(void *arg)
 		if (entry->data->amount_eat == 0)
 			return (NULL);
 		zzz(entry);
-		think(entry->data->tte / 2, entry);
+		think(0, entry);
 	}
 	return (NULL);
 }
@@ -103,6 +102,11 @@ int	main(int len, char **args)
 	if (!success)
 	{
 		printf("Error, out of mem\n");
+		return (0);
+	}
+	if (amount_philo <= 0)
+	{
+		printf("Error, there has to be at least one philosopher.\n");
 		return (0);
 	}
 	start_philo(len, args, amount_philo);

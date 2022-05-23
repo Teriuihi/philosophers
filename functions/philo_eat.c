@@ -34,7 +34,6 @@ int	take_fork(pthread_mutex_t *fork, t_philo_list *entry)
 		pthread_mutex_unlock(fork);
 		return (1);
 	}
-	pthread_mutex_unlock(&(entry->stuff->print));
 	if (get_time() - entry->data->last_meal > entry->data->ttd)
 	{
 		die(entry);
@@ -50,6 +49,13 @@ void	eat(t_philo_list *entry)
 		return ;
 	if (take_fork(entry->data->left_fork, entry))
 		return ;
+	if (entry->data->left_fork == &entry->data->right_fork)
+	{
+		pthread_mutex_unlock(entry->data->left_fork);
+		mili_sleep(entry->data->ttd);
+		die(entry);
+		return ;
+	}
 	if (take_fork(&entry->data->right_fork, entry))
 	{
 		pthread_mutex_unlock(entry->data->left_fork);

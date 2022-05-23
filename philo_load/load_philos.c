@@ -30,7 +30,6 @@ static t_bool	init(t_philo *data, t_philo_list ***top)
 {
 	if (data == NULL)
 	{
-		printf("Error\n");
 		return (FALSE);
 	}
 	*top = ft_calloc(1, sizeof(t_philo_list));
