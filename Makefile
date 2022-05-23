@@ -1,6 +1,6 @@
 NAME=philo
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS=-Wall -Wextra -Werror
 RM=rm -f
 
 FUNCTIONS=ft_atoi.c ft_calloc.c ft_isdigit.c ft_memcpy.c ft_memset.c \
