@@ -12,7 +12,7 @@
 
 #include <printf.h>
 #include "../philo_list/philo_list.h"
-#include "../../functions/util.h"
+#include "../functions/util.h"
 
 static void	add_new_philo_update_fork(t_philo_list **top,
 				t_philo_list *new_philo)
