@@ -12,8 +12,8 @@
 
 #ifndef PHILO_LIST_H
 # define PHILO_LIST_H
-# include "../headers/philo_structs.h"
-# include "../headers/bool.h"
+# include "../../headers/philo_structs.h"
+# include "../../headers/bool.h"
 
 typedef struct s_stuff
 {

@@ -12,7 +12,7 @@
 
 #include "philo_load/philo_load.h"
 #include "philo_list/philo_list.h"
-#include "functions/util.h"
+#include "../functions/util.h"
 #include <pthread.h>
 #include <printf.h>
 

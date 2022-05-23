@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "philo_list.h"
-#include "../functions/util.h"
+#include "../../functions/util.h"
 
 t_philo_list	*ft_philo_new(int id, t_philo *data, t_stuff *stuff)
 {

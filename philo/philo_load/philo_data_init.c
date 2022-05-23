@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <printf.h>
-#include "../functions/util.h"
+#include "../../functions/util.h"
 
 static t_bool	msg_bool(char *str)
 {
