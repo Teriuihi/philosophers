@@ -31,4 +31,8 @@ int		ft_atoi(const char *str, int *success);
 int		ft_isdigit(int c);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 t_bool	check_death(t_philo_list *entry);
+long	time_to_death(t_philo_list *entry);
+long	get_last_meal(t_philo_list *entry);
+void	set_last_meal(t_philo_list *entry, long time);
+t_bool	init_mutex(t_philo_list **top);
 #endif

@@ -16,56 +16,7 @@
 #include <pthread.h>
 #include <printf.h>
 
-void	*philo_thread(void *arg)
-{
-	t_philo_list	*entry;
-
-	entry = arg;
-	entry->data->last_meal = get_time();
-	if (entry->id % 2 == 1)
-		think(entry->data->tte / 2, entry);
-	while (check_death(entry) == FALSE)
-	{
-		eat(entry);
-		if (entry->data->amount_eat > 0)
-			entry->data->amount_eat--;
-		if (entry->data->amount_eat == 0)
-			return (NULL);
-		zzz(entry);
-		think(0, entry);
-	}
-	return (NULL);
-}
-
-t_bool	init_mutex(t_philo_list **top)
-{
-	t_philo_list	*entry;
-
-	entry = *top;
-	while (entry)
-	{
-		if (pthread_mutex_init(&entry->data->right_fork, NULL) != 0)
-			return (FALSE);
-		entry = entry->next;
-	}
-	entry = *top;
-	if (entry != NULL)
-		entry->stuff->start = get_time();
-	while (entry)
-	{
-		pthread_create(&entry->data->thread, NULL, philo_thread, entry);
-		entry = entry->next;
-	}
-	entry = *top;
-	while (entry)
-	{
-		pthread_join(entry->data->thread, NULL);
-		entry = entry->next;
-	}
-	return (TRUE);
-}
-
-void	start_philo(int len, char **args, int amount_philo)
+static void	start_philo(int len, char **args, int amount_philo)
 {
 	t_philo_list	**philo_top;
 	t_stuff			stuff;

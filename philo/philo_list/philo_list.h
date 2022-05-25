@@ -20,6 +20,7 @@ typedef struct s_stuff
 	t_bool			rip;
 	pthread_mutex_t	print;
 	long			start;
+	pthread_t		monitor;
 }	t_stuff;
 
 typedef struct s_philo_list

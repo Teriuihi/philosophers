@@ -21,9 +21,9 @@ void	sleep_if_not_dead(long time, char *msg, t_philo_list *entry)
 	if (check_death(entry) == TRUE)
 		return ;
 	u_sec = get_time();
-	if (u_sec + time - entry->data->last_meal > entry->data->ttd)
+	if (u_sec + time - get_last_meal(entry) > entry->data->ttd)
 	{
-		u_sec = entry->data->last_meal + entry->data->ttd - u_sec;
+		u_sec = get_last_meal(entry) + entry->data->ttd - u_sec;
 		if (u_sec > 0)
 		{
 			my_print(msg, entry->id, entry);

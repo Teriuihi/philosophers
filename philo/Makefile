@@ -4,7 +4,7 @@ CFLAGS=-Wall -Wextra -Werror
 RM=rm -f
 
 FUNCTIONS=ft_atoi.c ft_calloc.c ft_isdigit.c ft_memcpy.c ft_memset.c \
-philo_actions.c philo_eat.c util.c free_util.c
+philo_actions.c philo_eat.c util.c free_util.c util_2.c threads.c
 LOAD=load_philos.c philo_data_init.c
 LIST=add_philo.c last_philo.c new_philo.c
 FILES=main.c \

@@ -43,7 +43,7 @@ static t_bool	init_data(t_philo *data, int len, char **args)
 	if (!success)
 		return (msg_bool("Error amount to eat\n"));
 	data->left_fork = NULL;
-	data->last_meal = get_time();
+	data->last_meal = -1;
 	return (TRUE);
 }
 
