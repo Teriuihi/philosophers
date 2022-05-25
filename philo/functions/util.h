@@ -34,5 +34,7 @@ t_bool	check_death(t_philo_list *entry);
 long	time_to_death(t_philo_list *entry);
 long	get_last_meal(t_philo_list *entry);
 void	set_last_meal(t_philo_list *entry, long time);
+int		get_meals_left(t_philo_list *entry);
+void	reduce_meals_left(t_philo_list *entry);
 t_bool	init_mutex(t_philo_list **top);
 #endif

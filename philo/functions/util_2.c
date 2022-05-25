@@ -29,3 +29,21 @@ void	set_last_meal(t_philo_list *entry, long time)
 	entry->data->last_meal = time;
 	pthread_mutex_unlock(&(entry->stuff->print));
 }
+
+int	get_meals_left(t_philo_list *entry)
+{
+	int	result;
+
+	pthread_mutex_lock(&(entry->stuff->print));
+	result = entry->data->amount_eat;
+	pthread_mutex_unlock(&(entry->stuff->print));
+	return (result);
+}
+
+void	reduce_meals_left(t_philo_list *entry)
+{
+	pthread_mutex_lock(&(entry->stuff->print));
+	if (entry->data->amount_eat > 0)
+		entry->data->amount_eat--;
+	pthread_mutex_unlock(&(entry->stuff->print));
+}
